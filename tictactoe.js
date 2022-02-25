@@ -1,16 +1,22 @@
-let gridArray = [];
-
 // Creating gameBoard module to setup the grid
 const gameBoard = (function () {
-    //enter stuff here...
+    let gridArray = [];
 
 
+    return {
+        gridArray,
+    };
 })();
 
 // Factory function for player objects
 const playerFactory = function (name, state) {
     return { name, state };
 };
+
+function identifyWinner(array) {
+    if ((array[0] === array[1] && array[0] === array[2]) || (array[3] === array[4] && array[3] === array[5]) || (array[6] === array[7] && array[6] === array[8]) || (array[0] === array[4] && array[0] === array[8]) || (array[2] === array[4] && array[2] === array[6]))
+        return ''; // return winning player's name here...
+}
 
 const player1 = playerFactory('Player 1', 'X');
 const player2 = playerFactory('Computer', 'O');
