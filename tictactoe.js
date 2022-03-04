@@ -62,12 +62,6 @@ function handleClick(e) {
         swapTurn();
         setBoardHoverClass();
     }
-
-    // Check for Draw
-
-
-    swapPlayers();
-    setBoardHoverClass();
 }
 
 function placeMarker(cell, currentClass) {
