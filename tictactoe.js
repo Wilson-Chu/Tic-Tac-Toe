@@ -56,7 +56,12 @@ function handleClick(e) {
     // Check for Win
     if (checkWin(currentClass)) {
         endGame(false);
-    };
+    } else if (isDraw()) {
+        endGame(true);
+    } else {
+        swapTurn();
+        setBoardHoverClass();
+    }
 
     // Check for Draw
 
