@@ -24,19 +24,72 @@ const player2 = playerFactory('Computer', 'O');
 console.log(player1.name); // 'Player 1'
 console.log(player2.state); // 'O'
 */
-const cellElements = document.querySelectorAll('[data-cell]');
 
-cellElements.forEach(cell => {
-    cell.addEventListener('click', handleClick, { once: true })
-});
+const X_CLASS = 'x';
+const CIRCLE_CLASS = 'circle';
+const WINNING_COMBINATIONS = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
+];
+const cellElements = document.querySelectorAll('[data-cell]');
+const gameboard = document.getElementById('gameboard');
+let circleTurn; // Boolean, is it circle's turn?
+
+startGame();
+
+function startGame() {
+    circleTurn = false;
+    cellElements.forEach(cell => {
+        cell.addEventListener('click', handleClick, { once: true })
+    });
+    setBoardHoverClass();
+}
 
 function handleClick(e) {
-    // Place the appropriate marker
+    const cell = e.target;
+    const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
 
+    placeMarker(cell, currentClass);
     // Check for Win
+    if (checkWin(currentClass)) {
+        endGame(false);
+    };
 
     // Check for Draw
 
-    // Switch Players
+
+    swapPlayers();
+    setBoardHoverClass();
+}
+
+function placeMarker(cell, currentClass) {
+    cell.classList.add(currentClass)
+}
+
+function swapPlayers() {
+    circleTurn = !circleTurn;
+}
+
+function setBoardHoverClass() {
+    gameboard.classList.remove(X_CLASS);
+    gameboard.classList.remove(CIRCLE_CLASS);
+    if (circleTurn) {
+        gameboard.classList.add(CIRCLE_CLASS);
+    }
+    else {
+        gameboard.classList.add(X_CLASS);
+    }
+}
+
+function checkWin(currentClass) {
+    return WINNING_COMBINATIONS.some(combo => {
+        return combo.every(index => {
+            return cellElements[index].classList.contains(currentClass);
+        });
+    });
+}
+
+function engGame(draw) {
 
 }
