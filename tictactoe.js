@@ -34,6 +34,8 @@ const WINNING_COMBINATIONS = [
 ];
 const cellElements = document.querySelectorAll('[data-cell]');
 const gameboard = document.getElementById('gameboard');
+const winnerMessageElement = document.getElementById('winnerMessage');
+const winnerMessageContentElement = document.querySelector('[data-winner-message-content]');
 let circleTurn; // Boolean, is it circle's turn?
 
 startGame();
@@ -90,6 +92,12 @@ function checkWin(currentClass) {
     });
 }
 
-function engGame(draw) {
+function endGame(draw) {
+    if (draw) {
 
+    }
+    else {
+        winnerMessageContentElement.innerText = `${circleTurn ? 'Player 2' : 'Player 1'} Wins!`;
+    }
+    winnerMessageElement.classList.add('show');
 }
