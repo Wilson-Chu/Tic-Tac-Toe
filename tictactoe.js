@@ -1,30 +1,3 @@
-/*
-// Creating gameBoard module to setup the grid
-const gameBoard = (function () {
-    let gridArray = [];
-
-
-    return {
-        gridArray,
-    };
-})();
-
-// Factory function for player objects
-const playerFactory = function (name, state) {
-    return { name, state };
-};
-
-function identifyWinner(array) {
-    if ((array[0] === array[1] && array[0] === array[2]) || (array[3] === array[4] && array[3] === array[5]) || (array[6] === array[7] && array[6] === array[8]) || (array[0] === array[4] && array[0] === array[8]) || (array[2] === array[4] && array[2] === array[6]))
-        return ''; // return winning player's name here...
-}
-
-const player1 = playerFactory('Player 1', 'X');
-const player2 = playerFactory('Computer', 'O');
-console.log(player1.name); // 'Player 1'
-console.log(player2.state); // 'O'
-*/
-
 const X_CLASS = 'x';
 const CIRCLE_CLASS = 'circle';
 const WINNING_COMBINATIONS = [
@@ -53,7 +26,7 @@ function handleClick(e) {
     const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
 
     placeMarker(cell, currentClass);
-    // Check for Win
+
     if (checkWin(currentClass)) {
         endGame(false);
     } else if (isDraw()) {
@@ -62,6 +35,30 @@ function handleClick(e) {
         swapTurn();
         setBoardHoverClass();
     }
+}
+
+function checkWin(currentClass) {
+    return WINNING_COMBINATIONS.some(combo => {
+        return combo.every(index => {
+            return cellElements[index].classList.contains(currentClass);
+        });
+    });
+}
+
+function isDraw() {
+    return [...cellElements].every(cell => {
+        return cell.classList.contains(X_CLASS) || cell.classList.contains(CIRCLE_CLASS);
+    });
+}
+
+function endGame(draw) {
+    if (draw) {
+        winnerMessageContentElement.innerText = 'Draw!';
+    }
+    else {
+        winnerMessageContentElement.innerText = `${circleTurn ? 'Player 2' : 'Player 1'} Wins!`;
+    }
+    winnerMessageElement.classList.add('show');
 }
 
 function placeMarker(cell, currentClass) {
@@ -81,22 +78,4 @@ function setBoardHoverClass() {
     else {
         gameboard.classList.add(X_CLASS);
     }
-}
-
-function checkWin(currentClass) {
-    return WINNING_COMBINATIONS.some(combo => {
-        return combo.every(index => {
-            return cellElements[index].classList.contains(currentClass);
-        });
-    });
-}
-
-function endGame(draw) {
-    if (draw) {
-
-    }
-    else {
-        winnerMessageContentElement.innerText = `${circleTurn ? 'Player 2' : 'Player 1'} Wins!`;
-    }
-    winnerMessageElement.classList.add('show');
 }
