@@ -1,3 +1,4 @@
+/*
 // Creating gameBoard module to setup the grid
 const gameBoard = (function () {
     let gridArray = [];
@@ -22,3 +23,4 @@ const player1 = playerFactory('Player 1', 'X');
 const player2 = playerFactory('Computer', 'O');
 console.log(player1.name); // 'Player 1'
 console.log(player2.state); // 'O'
+*/
