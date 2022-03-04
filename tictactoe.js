@@ -24,3 +24,19 @@ const player2 = playerFactory('Computer', 'O');
 console.log(player1.name); // 'Player 1'
 console.log(player2.state); // 'O'
 */
+const cellElements = document.querySelectorAll('[data-cell]');
+
+cellElements.forEach(cell => {
+    cell.addEventListener('click', handleClick, { once: true })
+});
+
+function handleClick(e) {
+    // Place the appropriate marker
+
+    // Check for Win
+
+    // Check for Draw
+
+    // Switch Players
+
+}
