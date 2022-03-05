@@ -9,16 +9,23 @@ const cellElements = document.querySelectorAll('[data-cell]');
 const gameboard = document.getElementById('gameboard');
 const winnerMessageElement = document.getElementById('winnerMessage');
 const winnerMessageContentElement = document.querySelector('[data-winner-message-content]');
-let circleTurn; // Boolean, is it circle's turn?
+const restartButton = document.getElementById('restartButton');
+let circleTurn; // Boolean, is it O's turn?
 
 startGame();
+
+restartButton.addEventListener('click', startGame);
 
 function startGame() {
     circleTurn = false;
     cellElements.forEach(cell => {
+        cell.classList.remove(X_CLASS)
+        cell.classList.remove(CIRCLE_CLASS)
+        cell.removeEventListener('click', handleClick)
         cell.addEventListener('click', handleClick, { once: true })
     });
     setBoardHoverClass();
+    winnerMessageElement.classList.remove('show');
 }
 
 function handleClick(e) {
@@ -32,7 +39,7 @@ function handleClick(e) {
     } else if (isDraw()) {
         endGame(true);
     } else {
-        swapTurn();
+        swapPlayers();
         setBoardHoverClass();
     }
 }
