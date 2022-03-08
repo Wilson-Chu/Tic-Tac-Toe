@@ -11,6 +11,7 @@ const winnerMessageElement = document.getElementById('winnerMessage');
 const winnerMessageContentElement = document.querySelector('[data-winner-message-content]');
 const restartButton = document.getElementById('restartButton');
 let oTurn; // Boolean, is it O's turn?
+// Placeholders for each player's name
 let player1 = 'Player 1';
 let player2 = 'Player 2';
 
