@@ -11,12 +11,16 @@ const winnerMessageElement = document.getElementById('winnerMessage');
 const winnerMessageContentElement = document.querySelector('[data-winner-message-content]');
 const restartButton = document.getElementById('restartButton');
 let oTurn; // Boolean, is it O's turn?
+let player1 = 'Player 1';
+let player2 = 'Player 2';
 
 startGame();
 
 restartButton.addEventListener('click', startGame);
 
 function startGame() {
+    //player1=window.prompt('Enter your name: ');
+
     oTurn = false; // Always starts game with X
     cellElements.forEach(cell => {
         cell.classList.remove(X_CLASS)
@@ -63,7 +67,7 @@ function endGame(draw) {
         winnerMessageContentElement.innerText = 'Draw!';
     }
     else {
-        winnerMessageContentElement.innerText = `${oTurn ? 'Player 2' : 'Player 1'} Wins!`;
+        winnerMessageContentElement.innerText = `${oTurn ? player2 : player1} Wins!`;
     }
     winnerMessageElement.classList.add('show');
 }
